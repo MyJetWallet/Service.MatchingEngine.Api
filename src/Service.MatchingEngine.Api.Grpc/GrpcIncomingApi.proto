@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.myjetwallet.messages.incoming.grpc";
+option java_outer_classname = "GrpcIncomingApi";
+option objc_class_prefix = "API";
+option csharp_namespace = "ME.Contracts.Api";
+
+package com.myjetwallet.messages.incoming.grpc;
+
+import "google/protobuf/empty.proto";
+import "GrpcIncomingMessages.proto";
+import "OrderBooksMessages.proto";
+import "BalancesMessages.proto";
+
+service CashService {
+    rpc CashInOut(com.myjetwallet.messages.incoming.grpc.CashInOutOperation) returns (com.myjetwallet.messages.incoming.grpc.CashInOutOperationResponse) {}
+    rpc CashTransfer(com.myjetwallet.messages.incoming.grpc.CashTransferOperation) returns (com.myjetwallet.messages.incoming.grpc.CashTransferOperationResponse) {}
+    rpc CashSwap(com.myjetwallet.messages.incoming.grpc.CashSwapOperation) returns (com.myjetwallet.messages.incoming.grpc.CashSwapOperationResponse) {}
+    rpc ReservedCashInOut(com.myjetwallet.messages.incoming.grpc.ReservedCashInOutOperation) returns (com.myjetwallet.messages.incoming.grpc.ReservedCashInOutOperationResponse) {}
+}
+
+service TradingService {
+    rpc MarketOrder(com.myjetwallet.messages.incoming.grpc.MarketOrder) returns (com.myjetwallet.messages.incoming.grpc.MarketOrderResponse) {}
+    rpc LimitOrder(com.myjetwallet.messages.incoming.grpc.LimitOrder) returns (com.myjetwallet.messages.incoming.grpc.LimitOrderResponse) {}
+    rpc CancelLimitOrder(com.myjetwallet.messages.incoming.grpc.LimitOrderCancel) returns (com.myjetwallet.messages.incoming.grpc.LimitOrderCancelResponse) {}
+    rpc MultiLimitOrder(com.myjetwallet.messages.incoming.grpc.MultiLimitOrder) returns (com.myjetwallet.messages.incoming.grpc.MultiLimitOrderResponse) {}
+}
+
+service BalancesService {
+    rpc GetAll(com.myjetwallet.balances.BalancesGetAllRequest) returns (com.myjetwallet.balances.BalancesGetAllResponse) {}
+    rpc GetByAssetId(com.myjetwallet.balances.BalancesGetByAssetIdRequest) returns (com.myjetwallet.balances.BalancesGetByAssetIdResponse) {}
+}
+
+service OrderBooksService {
+    rpc OrderBookSnapshots(google.protobuf.Empty) returns (stream com.myjetwallet.messages.orderbooks.grpc.OrderBookSnapshot) {}
+}
