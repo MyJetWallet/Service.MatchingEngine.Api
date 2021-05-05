@@ -5,25 +5,25 @@ namespace Service.MatchingEngine.Api.Settings
     [YamlAttributesOnly]
     public class SettingsModel
     {
-        [YamlProperty("MatchingEngine.Api.SeqServiceUrl")]
+        [YamlProperty("MatchingEngineApi.SeqServiceUrl")]
         public string SeqServiceUrl { get; set; }
 
-        [YamlProperty("MatchingEngine.Api.ZipkinUrl")]
+        [YamlProperty("MatchingEngineApi.ZipkinUrl")]
         public string ZipkinUrl { get; set; }
 
-        [YamlProperty("MatchingEngine.Api.MyNoSqlReaderHostPort")]
+        [YamlProperty("MatchingEngineApi.MyNoSqlReaderHostPort")]
         public string MyNoSqlReaderHostPort { get; set; }
 
-        [YamlProperty("MatchingEngine.Api.BalancesGrpcUrl")]
+        [YamlProperty("MatchingEngineApi.MatchingEngine.BalancesGrpcServiceUrl")]
         public string BalancesGrpcUrl { get; set; }
 
-        [YamlProperty("MatchingEngine.Api.CashGrpcUrl")]
+        [YamlProperty("MatchingEngineApi.MatchingEngine.CashGrpcServiceUrl")]
         public string CashGrpcUrl { get; set; }
 
-        [YamlProperty("MatchingEngine.Api.TradingGrpcUrl")]
+        [YamlProperty("MatchingEngineApi.MatchingEngine.TradingGrpcServiceUrl")]
         public string TradingGrpcUrl { get; set; }
 
-        [YamlProperty("MatchingEngine.Api.OrderBookGrpcUrl")]
+        [YamlProperty("MatchingEngineApi.MatchingEngine.OrderBookGrpcServiceUrl")]
         public string OrderBookGrpcUrl { get; set; }
     }
 }

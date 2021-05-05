@@ -17,13 +17,12 @@ namespace Service.MatchingEngine.Api.Services
             _orderBooksServiceClient = matchingEngineClientFactory.GetOrderBookService();
         }
 
-        public override Task OrderBookSnapshots(Empty request, IServerStreamWriter<OrderBookSnapshot> responseStream, ServerCallContext context)
+        public override async Task OrderBookSnapshots(Empty request, IServerStreamWriter<OrderBookSnapshot> responseStream, ServerCallContext context)
         {
             using var activity = MyTelemetry.StartActivity("OrderBookSnapshots");
-            using var resp =
-                _orderBooksServiceClient.OrderBookSnapshots(new Empty(), cancellationToken: context.CancellationToken);
+            using var resp = _orderBooksServiceClient.OrderBookSnapshots(new Empty(), cancellationToken: context.CancellationToken);
 
-            return Task.WhenAll(resp.ResponseStream.ForEachAsync(responseStream.WriteAsync));
+            await resp.ResponseStream.ForEachAsync(responseStream.WriteAsync);
         }
     }
 }
