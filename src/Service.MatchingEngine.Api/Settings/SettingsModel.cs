@@ -1,8 +1,8 @@
-﻿using SimpleTrading.SettingsReader;
+﻿using MyJetWallet.Sdk.Service;
+using MyYamlParser;
 
 namespace Service.MatchingEngine.Api.Settings
 {
-    [YamlAttributesOnly]
     public class SettingsModel
     {
         [YamlProperty("MatchingEngineApi.SeqServiceUrl")]
@@ -25,5 +25,8 @@ namespace Service.MatchingEngine.Api.Settings
 
         [YamlProperty("MatchingEngineApi.MatchingEngine.OrderBookGrpcServiceUrl")]
         public string OrderBookGrpcUrl { get; set; }
+
+        [YamlProperty("LiquidityEngine.ElkLogs")]
+        public LogElkSettings ElkLogs { get; set; }
     }
 }

@@ -14,10 +14,8 @@ using Prometheus;
 using ProtoBuf.Grpc.Server;
 using Service.MatchingEngine.Api.Modules;
 using Service.MatchingEngine.Api.Services;
-using Service.MatchingEngine.Api.Settings;
 using SimpleTrading.BaseMetrics;
 using SimpleTrading.ServiceStatusReporterConnector;
-using SimpleTrading.SettingsReader;
 
 namespace Service.MatchingEngine.Api
 {
@@ -31,7 +29,7 @@ namespace Service.MatchingEngine.Api
             Configuration = configuration;
 
             _myNoSqlClient = new MyNoSqlTcpClient(
-                () => SettingsReader.ReadSettings<SettingsModel>(Program.SettingsFileName).MyNoSqlReaderHostPort,
+                Program.ReloadedSettings(e => e.MyNoSqlReaderHostPort),
                 ApplicationEnvironment.HostName ??
                 $"{ApplicationEnvironment.AppName}:{ApplicationEnvironment.AppVersion}");
         }
