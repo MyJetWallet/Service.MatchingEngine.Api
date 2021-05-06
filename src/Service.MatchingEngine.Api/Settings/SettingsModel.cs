@@ -26,7 +26,7 @@ namespace Service.MatchingEngine.Api.Settings
         [YamlProperty("MatchingEngineApi.MatchingEngine.OrderBookGrpcServiceUrl")]
         public string OrderBookGrpcUrl { get; set; }
 
-        [YamlProperty("LiquidityEngine.ElkLogs")]
+        [YamlProperty("MatchingEngineApi.ElkLogs")]
         public LogElkSettings ElkLogs { get; set; }
     }
 }
