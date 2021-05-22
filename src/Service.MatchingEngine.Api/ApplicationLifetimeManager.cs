@@ -1,27 +1,36 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyJetWallet.Sdk.Service;
+using MyNoSqlServer.DataReader;
 
 namespace Service.MatchingEngine.Api
 {
     public class ApplicationLifetimeManager : ApplicationLifetimeManagerBase
     {
         private readonly ILogger<ApplicationLifetimeManager> _logger;
+        private readonly MyNoSqlTcpClient _myNoSqlClient;
 
-        public ApplicationLifetimeManager(IHostApplicationLifetime appLifetime, ILogger<ApplicationLifetimeManager> logger)
+        public ApplicationLifetimeManager(IHostApplicationLifetime appLifetime,
+            ILogger<ApplicationLifetimeManager> logger,
+            MyNoSqlTcpClient myNoSqlClient)
             : base(appLifetime)
         {
+            _myNoSqlClient = myNoSqlClient;
             _logger = logger;
         }
 
         protected override void OnStarted()
         {
             _logger.LogInformation("OnStarted has been called.");
+            _myNoSqlClient.Start();
+            _logger.LogInformation("MyNoSqlTcpClient is started.");
         }
 
         protected override void OnStopping()
         {
             _logger.LogInformation("OnStopping has been called.");
+            _myNoSqlClient.Stop();
+            _logger.LogInformation("MyNoSqlTcpClient is stopped.");
         }
 
         protected override void OnStopped()

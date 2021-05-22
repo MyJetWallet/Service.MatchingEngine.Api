@@ -2,7 +2,6 @@
 using MyNoSqlServer.DataReader;
 using Service.Fees.Client;
 using Service.MatchingEngine.Api.Factory;
-using Service.MatchingEngine.Api.Services;
 
 namespace Service.MatchingEngine.Api.Modules
 {
@@ -17,6 +16,11 @@ namespace Service.MatchingEngine.Api.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
+            builder
+                .RegisterInstance(_myNoSqlClient)
+                .AsSelf()
+                .SingleInstance();
+            
             builder.RegisterAssetFeesClients(_myNoSqlClient);
             builder.RegisterSpotInstrumentFeesClients(_myNoSqlClient);
 
@@ -24,22 +28,6 @@ namespace Service.MatchingEngine.Api.Modules
                 Program.Settings.BalancesGrpcUrl, Program.Settings.OrderBookGrpcUrl);
 
             builder.RegisterInstance(factory).AsSelf().SingleInstance();
-
-            builder.RegisterType<BalancesService>()
-                .As<ME.Contracts.Api.BalancesService.BalancesServiceBase>()
-                .SingleInstance();
-            
-            builder.RegisterType<CashService>()
-                .As<ME.Contracts.Api.CashService.CashServiceBase>()
-                .SingleInstance();
-
-            // builder.RegisterInstance(factory.GetCashService()).As<CashService.CashServiceClient>().SingleInstance();
-            // builder.RegisterInstance(factory.GetTradingService()).As<TradingService.TradingServiceClient>()
-            //     .SingleInstance();
-            // builder.RegisterInstance(factory.GetBalancesService()).As<BalancesService.BalancesServiceClient>()
-            //     .SingleInstance();
-            // builder.RegisterInstance(factory.GetOrderBookService()).As<OrderBooksService.OrderBooksServiceClient>()
-            //     .SingleInstance();
         }
     }
 }
