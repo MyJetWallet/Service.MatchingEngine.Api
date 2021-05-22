@@ -19,7 +19,10 @@ namespace Service.MatchingEngine.Api.Converters
 
             fee.TargetAccountId = assetFees.AccountId;
             fee.TargetWalletId = assetFees.WalletId;
-            fee.AssetId.Add(assetFees.AssetId);
+            if (!string.IsNullOrEmpty(assetFees.FeeAssetId))
+            {
+                fee.AssetId.Add(assetFees.FeeAssetId);
+            }
 
             return fee;
         }
@@ -34,7 +37,10 @@ namespace Service.MatchingEngine.Api.Converters
 
             fee.TargetAccountId = instrumentFees.AccountId;
             fee.TargetWalletId = instrumentFees.WalletId;
-            fee.AssetId.Add(instrumentFees.FeeAssetId);
+            if (!string.IsNullOrEmpty(instrumentFees.FeeAssetId))
+            {
+                fee.AssetId.Add(instrumentFees.FeeAssetId);
+            }
 
             return fee;
         }
@@ -52,7 +58,10 @@ namespace Service.MatchingEngine.Api.Converters
 
             fee.TargetAccountId = instrumentFees.AccountId;
             fee.TargetWalletId = instrumentFees.WalletId;
-            fee.AssetId.Add(instrumentFees.FeeAssetId);
+            if (!string.IsNullOrEmpty(instrumentFees.FeeAssetId))
+            {
+                fee.AssetId.Add(instrumentFees.FeeAssetId);
+            }
 
             return fee;
         }
