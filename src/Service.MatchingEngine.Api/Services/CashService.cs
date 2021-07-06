@@ -34,7 +34,7 @@ namespace Service.MatchingEngine.Api.Services
                 .AddTag("assetId", request.AssetId)
                 .AddTag("volume", request.Volume);
 
-            if (isWithdrawal)
+            if (isWithdrawal && request.Fees.Count == 0)
             {
                 var fees = _assetFeesClient.GetAssetFees(request.BrokerId, request.AssetId,
                     OperationType.Withdrawal);
