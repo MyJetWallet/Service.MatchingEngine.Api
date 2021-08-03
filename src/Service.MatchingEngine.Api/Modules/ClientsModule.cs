@@ -21,8 +21,7 @@ namespace Service.MatchingEngine.Api.Modules
                 .AsSelf()
                 .SingleInstance();
             
-            builder.RegisterAssetFeesClients(_myNoSqlClient);
-            builder.RegisterSpotInstrumentFeesClients(_myNoSqlClient);
+            builder.RegisterFeesClients(_myNoSqlClient);
 
             var factory = new MatchingEngineClientFactory(Program.Settings.CashGrpcUrl, Program.Settings.TradingGrpcUrl,
                 Program.Settings.BalancesGrpcUrl, Program.Settings.OrderBookGrpcUrl);
