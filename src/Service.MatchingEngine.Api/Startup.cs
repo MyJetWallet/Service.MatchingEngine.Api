@@ -36,10 +36,9 @@ namespace Service.MatchingEngine.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCodeFirstGrpc(options =>
+            services.BindCodeFirstGrpc(options =>
             {
-                options.Interceptors.Add<PrometheusMetricsInterceptor>();
-                options.BindMetricsInterceptors();
+                options.Interceptors.Add<LogRequestInterceptor>();
             });
 
             services.AddHostedService<ApplicationLifetimeManager>();
